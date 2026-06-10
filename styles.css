@@ -336,6 +336,66 @@ h3 {
   text-transform: uppercase;
 }
 
+.post-article {
+  width: min(720px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: clamp(56px, 9vw, 104px) 0;
+}
+
+.post-article .meta {
+  margin-bottom: 22px;
+}
+
+.post-article h1 {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  line-height: 1.02;
+}
+
+.post-article .lead {
+  margin-bottom: 14px;
+}
+
+.crosspost-note {
+  margin: 0 0 48px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.crosspost-note a {
+  border-bottom: 1px solid var(--ink);
+  color: var(--ink);
+}
+
+.post-body h2 {
+  margin-top: 48px;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+}
+
+.post-body p {
+  margin-bottom: 22px;
+  font-size: clamp(1.08rem, 1.8vw, 1.22rem);
+  line-height: 1.42;
+}
+
+.post-figure {
+  margin: 36px 0;
+}
+
+.post-figure img {
+  width: 100%;
+}
+
+.post-body blockquote {
+  margin: 32px 0;
+  padding-left: 24px;
+  border-left: 2px solid var(--accent);
+  color: var(--accent);
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  line-height: 1.2;
+}
+
 .page-logo {
   width: min(420px, 70vw);
   margin-bottom: clamp(44px, 10vw, 104px);
