@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SOTA genome interpretation with agentic AI: An interstitial lung disease case study | Gamow Labs</title>
+    <meta name="description" content="Early evidence that correctly harnessed AI agents can diagnose genetic disease at or above human performance — benchmarked against clinical labs and consumer chatbots on interstitial lung disease cases.">
+    <link rel="canonical" href="https://gamowlabs.com/sota-genome-interpretation-with-agentic-ai.html">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Gamow Labs">
+    <meta property="og:url" content="https://gamowlabs.com/sota-genome-interpretation-with-agentic-ai.html">
+    <meta property="og:title" content="SOTA genome interpretation with agentic AI: An interstitial lung disease case study">
+    <meta property="og:description" content="Early evidence that correctly harnessed AI agents can diagnose genetic disease at or above human performance — benchmarked against clinical labs and consumer chatbots on interstitial lung disease cases.">
+    <meta property="og:image" content="https://gamowlabs.com/assets/gamow-logo-black.png">
+    <meta property="article:published_time" content="2026-07-06">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SOTA genome interpretation with agentic AI: An interstitial lung disease case study">
+    <meta name="twitter:description" content="Early evidence that correctly harnessed AI agents can diagnose genetic disease at or above human performance — benchmarked against clinical labs and consumer chatbots on interstitial lung disease cases.">
+    <meta name="twitter:image" content="https://gamowlabs.com/assets/gamow-logo-black.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="index.html"><img src="assets/gamow-wordmark.jpeg" alt="Gamow Labs"></a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="careers.html">Careers</a>
+          <a href="blog.html" aria-current="page">Blog</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <article class="post-article">
+        <p class="meta">July 6, 2026 · Daniel McKinnon</p>
+        <h1>SOTA genome interpretation with agentic AI: An interstitial lung disease case study</h1>
+
+        <div class="post-body">
+          <p>Over the past few years, <a href="https://www.nature.com/articles/s41525-024-00404-0">overwhelming evidence has emerged that expanding access to whole genome sequencing improves clinical and economic outcomes in the NICU</a>, a setting highly enriched for genetic disease. However, sequencing is still largely limited to top academic centers due to the:</p>
+          <ul>
+            <li>complexity of ordering and interpreting results</li>
+            <li>expense and difficulty filling for reimbursement despite near universal payer coverage</li>
+            <li>time required to receive results or reanalysis</li>
+          </ul>
+          <p>We at Gamow Labs hypothesize that correctly harnessed AI agents can perform the task of diagnosing a genetic disease at or above human performance at a fraction of the cost and in a fraction of the time at great scale. In this blog post, we present early evidence that this hypothesis is true.</p>
+          <p>Through a blinded collaboration with <a href="https://www.bcm.edu/research/faculty-labs/pawel-stankiewicz-lab">Pawel Stankiewicz at Baylor College of Medicine</a>, we accessed the raw reads (FASTQ files) of 46 individuals, who were either infants lost to interstitial lung disease or their healthy family members. In all cases, the initial molecular diagnosis was missed by the first-line clinical genomics lab and escalated to Dr. Stankiewicz, the leading expert on the genetic causes of these diseases, for reanalysis.</p>
+          <p>We provided the Gamow Labs system, George-0.1, with the raw FASTQ files alongside a simple phenotype provided by Dr. Stankiewicz: &ldquo;the patient suffered from a lethal lung disorder like alveolar capillary dysplasia, acinar dysplasia, or congenital alveolar dysplasia&rdquo; (this phenotype was obviously wrong for the healthy family members, but we had no idea that these were included). The agent generated a molecular diagnosis classified using the ACMG guidelines.</p>
+          <p>We then shared the results to Dr. Stankiewicz for scoring. A true positive would be marked as correct if the variant matched his answer key with pathogenic or likely pathogenic scoring. A true negative would be marked correct if there were either no diagnosis or variant of uncertain significance (VUS) (the system is tuned for recall, so it is not surprising to find some VUSes called for healthy people when presented with a diseased phenotype).</p>
+          <p>The results were encouraging. Every case, with the exception of the healthy family members, was incorrectly diagnosed by the first-line clinical labs (this is why they were escalated to Dr. Stankiewicz). Dr. Stankiewicz&rsquo;s lab subsequently solved 20/27, leaving 7 as mysteries. Gamow Labs&rsquo; George-0.1, matched the performance of Dr. Stankiewicz&rsquo;s lab, reproducing the molecular diagnosis of all 20 cases while contributing 2 additional solutions. These initial results, summarized in Table 1, suggest that agentic AI like George-0.1 can exceed the performance of clinical whole genome sequencing labs and match or even exceed specialized human experts.</p>
+          <p>Furthermore, we independently validated the <a href="https://ai.nejm.org/doi/full/10.1056/AIcs2501343">recent NEJM AI paper authored by Boston Children&rsquo;s and OpenAI</a> on this dataset. They showed that consumer chatbots&ndash;ChatGPT Pro in our study and o3 Deep Research in theirs&ndash;have significant utility in rare disease diagnosis. We observed the same. While performance lagged Gamow Labs&rsquo;s George-0.1, uploading a phenotype and genome into ChatGPT outperforms clinical labs on these challenging cases.</p>
+          <p>We attempted to extend the experiment to <a href="http://claude.ai">Claude.ai</a> (Opus 4.8) and <a href="http://gemini.google.com">Gemini.google.com</a> (Gemini 3.5 Flash), two other popular consumer tools, but neither system succeeded in the first three attempts.</p>
+
+          <figure class="post-figure"><img src="assets/acd-benchmark.png" alt="Bar chart benchmarking whole genome interpretation performance between clinical labs, consumer chatbots, and specialized systems, comparing Standard of care (clinical lab), Gamow Labs George-0.1, and ChatGPT 5.5 Pro across five case categories."></figure>
+
+          <div class="post-table-wrap">
+            <table class="post-table">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Standard of care (clinical lab) correct</th>
+                  <th scope="col">Gamow Labs correct</th>
+                  <th scope="col">ChatGPT 5.5 Pro correct*</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Healthy family members</th>
+                  <td>20</td>
+                  <td>N/A</td>
+                  <td>20 (100%)</td>
+                  <td>6 (30%)</td>
+                </tr>
+                <tr>
+                  <th scope="row">Published known diagnosis</th>
+                  <td>11</td>
+                  <td>0 (0%)</td>
+                  <td>11 (100%)</td>
+                  <td>9 (82%)</td>
+                </tr>
+                <tr>
+                  <th scope="row">Unpublished known diagnosis</th>
+                  <td>8</td>
+                  <td>0 (0%)</td>
+                  <td>8 (100%)</td>
+                  <td>5 (63%)</td>
+                </tr>
+                <tr>
+                  <th scope="row">Previously unknown diagnosis</th>
+                  <td>2</td>
+                  <td>0 (0%)</td>
+                  <td>2 (100%)</td>
+                  <td>2 (100%)</td>
+                </tr>
+                <tr>
+                  <th scope="row">Still unknown diagnosis</th>
+                  <td>5</td>
+                  <td>0 (0%)</td>
+                  <td>N/A</td>
+                  <td>&lt;=1 (&lt;=20%)**</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="post-caption">Table 1: summary of performance of three approaches to genome interpretation. These are all hard cases involving complex structural or intronic variants that were initially missed by various clinical labs. ChatGPT Pro significantly improved diagnostic yield over clinical workflow and Gamow Labs&rsquo; George-0.1 improved further.</p>
+          <p class="post-caption">* pre-called vcf files passed to chatbot vs. raw reads to Gamow Labs&rsquo; George-0.1, making the task easier<br>
+          ** 4/5 unknown cases received molecular diagnoses that were obviously wrong due to the reasons discussed in Case Study #2</p>
+
+          <h2>Case study #1: Clinical lab false negative</h2>
+          <p>ACD209.3, <a href="https://pubmed.ncbi.nlm.nih.gov/36124617/">published in 2022</a> (only published cases discussed here), was originally sequenced by Rady Children&rsquo;s Institute for Genomic Medicine. Alignment and variant calling were performed <a href="https://www.sciencedirect.com/science/article/pii/S1098360023010225">using a standard Illumina DRAGEN pipeline in addition to a combination of open-source CNV/SV callers</a>. Because this ensemble of callers generates a significant number of variants, a CCDS filter was applied to remove variants &gt;1 kilobase from the coding regions of interest. However, this decision resulted in discarding the molecular diagnosis because the impacted <em>FOXF1</em> enhancer is one megabase upstream of the affected gene.</p>
+          <p>This type of error is not uncommon. <a href="https://www.sciencedirect.com/science/article/pii/S1098360021049595">The Deciphering Developmental Disorders (DDD) study</a> directly addressed this question by evaluating ClinVar pathogenic/likely pathogenic variants in exome data from 13,462 probands. Of ClinVar pathogenic variants identified in the cohort, 83.9% (1,134/1,352) were successfully flagged by standard automated filtering pipelines, meaning 16.1% (218/1,352) were filtered out by consequence, inheritance, or other automated filters. After clinical review of these filtered-out variants, 112 variants in 107 probands (0.8% of the cohort) were identified as potential diagnoses that had been missed.</p>
+          <p>Because there is no need to pre-filter variants for an AI, this problem can entirely be avoided with these types of systems. Both Gamow Labs and ChatGPT Pro solve this case.</p>
+
+          <h2>Case study #2: ChatGPT Pro false positive</h2>
+          <p>False positives were the largest cohort of ChatGPT failures. While it can be argued that it is unfair to provide an incorrect phenotype, the same incorrect phenotype was provided to both systems and, in a clinical setting, this can be common both due to incorrect initial assessment and evolving conditions. When clinician time is limited, overdiagnosing can be problematic.</p>
+          <p>This behavior came in many flavors, but the root cause was jumping to conclusions not supported by evidence or considering all information. For example, one of the healthy family members of ACD130.3, <a href="https://pubmed.ncbi.nlm.nih.gov/27071622/">published in 2016</a>, was confidently diagnosed with a pathogenic 308 base pair deletion in the <em>FOXF1</em> regulatory region responsible for many ACD cases. The call is real and in a suspicious region, but this particular deletion is not pathogenic, as evidenced by the 40% population frequency, which ChatGPT Pro did not bother to check.</p>
+          <p>Each false positive was unique, but the errors largely fell into three buckets:</p>
+          <ul>
+            <li>Drawing overly creative links between gene and disease</li>
+            <li>Ignoring data, e.g. population frequency, that could disqualify a variant as pathogenic</li>
+            <li>Hallucinating calls in subtle ways, e.g. incorrectly applying wrong coordinate systems or misunderstanding transcripts</li>
+          </ul>
+
+          <h2>Case study #3: ChatGPT Pro false negative</h2>
+          <p>The distribution of ChatGPT&rsquo;s errors over the unpublished cases was similar to the false positives, but the two published cases could be chalked up to simple errors.</p>
+          <p>In ACD144.3, <a href="https://pubmed.ncbi.nlm.nih.gov/27822317/">published in 2016</a>, ChatGPT Pro concluded that &ldquo;there is no high-confidence genetic root cause&rdquo; and explained why none of the calls could be diagnostic. I was a bit puzzled by this because the solution is a large deletion across the <em>FOXF1</em> enhancer similar to cases ChatGPT Pro solved correctly.</p>
+          <p>Once the Gamow Labs&rsquo; George-0.1 generated a plausible hypothesis, I returned to the same ChatGPT Pro session and asked if it was correct. ChatGPT Pro responded that it was and its previous error was due to not lifting over the published hg19 coordinates for the hg38 vcf file uploaded.</p>
+          <p>This is a trivial and unexpected error. Despite the impressive intelligence these models possess, these errors are relatively common when not harnessed optimally. This is a large motivation of the Gamow Labs mission.</p>
+
+          <h2>If this work interests you, join Gamow Labs!</h2>
+          <p>If you are a cracked AI engineer passionate about biology or an AGI-pilled computational biologist and this work seems interesting, please reach out! We are looking for exceptional people to join the team.</p>
+        </div>
+
+        <p class="inline-actions">
+          <a class="profile-link" href="careers.html">See open roles at Gamow Labs</a>
+        </p>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <img src="assets/gamow-wordmark.jpeg" alt="Gamow Labs">
+        <span>The interpretation layer for genomic medicine.</span>
+      </div>
+    </footer>
+  </body>
+</html>
