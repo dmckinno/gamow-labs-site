@@ -396,6 +396,63 @@ h3 {
   line-height: 1.2;
 }
 
+.post-body a {
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent);
+}
+
+.post-body ul {
+  margin: -6px 0 22px;
+  padding-left: 1.25em;
+  color: var(--muted);
+  font-size: clamp(1.08rem, 1.8vw, 1.22rem);
+  line-height: 1.42;
+}
+
+.post-body li {
+  margin-bottom: 8px;
+}
+
+.post-table-wrap {
+  margin: 36px 0;
+  overflow-x: auto;
+}
+
+.post-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(0.92rem, 1.5vw, 1.02rem);
+  line-height: 1.3;
+}
+
+.post-table th,
+.post-table td {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.post-table thead th {
+  background: var(--soft);
+  font-weight: 600;
+}
+
+.post-table tbody th {
+  font-weight: 600;
+}
+
+.post-table tbody td {
+  color: var(--muted);
+}
+
+.post-body p.post-caption {
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
 .page-logo {
   width: min(420px, 70vw);
   margin-bottom: clamp(44px, 10vw, 104px);
