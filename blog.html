@@ -57,6 +57,22 @@
         </div>
       </section>
 
+      <section class="section newsletter-section">
+        <div class="wrap">
+          <div class="newsletter-card">
+            <h2>Subscribe to our newsletter</h2>
+            <p class="lead">Stay in the loop with the latest from Gamow Labs.</p>
+            <form class="newsletter-form" id="newsletter-form">
+              <div class="newsletter-fields">
+                <input type="email" name="email" placeholder="Enter your email" aria-label="Email address" required>
+                <button type="submit" class="button newsletter-submit">Subscribe</button>
+              </div>
+              <p class="newsletter-disclaimer">By clicking subscribe I agree to receive news and updates from Gamow Labs.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+
     </main>
 
     <footer class="site-footer">
@@ -65,5 +81,42 @@
         <span>The interpretation layer for genomic medicine.</span>
       </div>
     </footer>
+
+    <script>
+      // Backend is a Google Apps Script Web App that adds the submitter to the
+      // newsletter@gamowlabs.com Google Group. See scripts/newsletter-apps-script.js.
+      var NEWSLETTER_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwSSgEF_1f9vw7zSzciooKg8dA9-jIE9JEK137cUHK9gDk3S1J4rFZAbk4D3sBIF5inLQ/exec';
+
+      (function () {
+        var form = document.getElementById('newsletter-form');
+        if (!form) return;
+
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          if (NEWSLETTER_ENDPOINT.indexOf('PASTE_') === 0) {
+            alert('Newsletter signup is not wired up yet.');
+            return;
+          }
+
+          var email = form.email.value;
+
+          // mode: 'no-cors' means the response is opaque either way — awaiting it
+          // buys no real confirmation, just a wait. Update the UI immediately and
+          // let the request finish in the background.
+          fetch(NEWSLETTER_ENDPOINT, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'email=' + encodeURIComponent(email)
+          }).catch(function () {
+            // Genuine send failure (offline, blocked, etc). Nothing to roll back
+            // to since the success message is already showing — safe to ignore.
+          });
+
+          form.innerHTML = '<p class="newsletter-success">Thanks — you’re on the list.</p>';
+        });
+      })();
+    </script>
   </body>
 </html>
