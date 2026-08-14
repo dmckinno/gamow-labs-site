@@ -373,6 +373,11 @@ h3 {
   font-size: clamp(1.5rem, 3vw, 2.1rem);
 }
 
+.post-body h3 {
+  margin-top: 34px;
+  margin-bottom: 12px;
+}
+
 .post-body p {
   margin-bottom: 22px;
   font-size: clamp(1.08rem, 1.8vw, 1.22rem);
