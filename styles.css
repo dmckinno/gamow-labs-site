@@ -401,7 +401,8 @@ h3 {
   border-bottom: 1px solid var(--accent);
 }
 
-.post-body ul {
+.post-body ul,
+.post-body ol {
   margin: -6px 0 22px;
   padding-left: 1.25em;
   color: var(--muted);
