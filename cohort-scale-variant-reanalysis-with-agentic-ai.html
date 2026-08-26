@@ -113,7 +113,32 @@
           <p>The original SouthSeq study didn&rsquo;t include a phenotype for each case. We generated synthetic phenotypes for each case in SouthSeq to accommodate for phenotype-dependent criteria (PP4, PS4, CNV Section 5). This was based on a skill that conditions on sex, age, variant, gene or region, inheritance, variant classification, and disease association. That outputted <code>Generated Synthetic Phenotype</code>, <code>Generated Synthetic HPO</code> and <code>Generated Synthetic Limitations</code>. We also made it clear in our analysis that this was a generative phenotype that makes the output deliberately incomplete, more explicitly that the absence of a feature is not evidence of absence.</p>
           <p>This made PP4 interesting: the disease name is an input to the phenotype generator. So we needed to avoid circular evidence (phenotype was derived from the disease, used as evidence for the disease, meaning PP4 would be worth +1 on most rows and move tiers). Applying it would inflate the entire sheet. So we established the following policy:</p>
 
-          <!-- CONTINUE HERE: PP4 policy, steps 3-5, results, figures, closing. -->
+          <div class="post-table-wrap">
+            <table class="post-table">
+              <thead>
+                <tr>
+                  <th scope="col">Generated data</th>
+                  <th scope="col">PP4 calculation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Synthetic phenotype present, limitations permit</th>
+                  <td>Scored, flagged synthetic-derived</td>
+                </tr>
+                <tr>
+                  <th scope="row">Synthetic phenotype present, limitations constrain it</th>
+                  <td>Reduced or withheld, citing the specific limitation</td>
+                </tr>
+                <tr>
+                  <th scope="row">No synthetic phenotype on the row</th>
+                  <td>Always 0, &ldquo;no phenotype available,&rdquo; explicitly not a mismatch</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- CONTINUE HERE: steps 3-5, results, figures, closing. -->
         </div>
 
         <p class="inline-actions">
