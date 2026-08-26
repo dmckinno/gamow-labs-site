@@ -399,6 +399,18 @@ h3 {
   margin-bottom: 12px;
 }
 
+/* One level below h3, which already sits close to body size. Borrows the
+   accent-label treatment used by .eyebrow and .meta rather than shrinking. */
+.post-body h4 {
+  margin-top: 30px;
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-size: 0.86rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 /* Variant nomenclature (HGVS) reads as data, not prose. */
 .post-body code {
   padding: 1px 5px;
