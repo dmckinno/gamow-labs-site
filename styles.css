@@ -399,6 +399,15 @@ h3 {
   margin-bottom: 12px;
 }
 
+/* Variant nomenclature (HGVS) reads as data, not prose. */
+.post-body code {
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: var(--soft);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.86em;
+}
+
 .post-body p {
   margin-bottom: 22px;
   font-size: clamp(1.08rem, 1.8vw, 1.22rem);
