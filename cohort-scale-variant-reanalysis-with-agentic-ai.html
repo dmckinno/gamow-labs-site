@@ -138,7 +138,32 @@
             </table>
           </div>
 
-          <!-- CONTINUE HERE: steps 3-5, results, figures, closing. -->
+          <p>We wrote a function to fail any row scoring PP4 above zero without the limitation, so a scored PP4 could never later be misread as resting on clinical data. The same process was applied to PS4 and to CNV Section 5.</p>
+
+          <h3>3) Pull ClinVar at submitter level</h3>
+          <p>For nearly every case in SouthSeq, the table included ClinVar SCV. We pulled every finding&rsquo;s record at submitter level, and sorted the submissions into three piles:</p>
+          <ul>
+            <li>Independent evidence: other laboratories that reached a classification on their own data</li>
+            <li>The reporting laboratory&rsquo;s own deposit: HudsonAlpha&rsquo;s SCV, which is the same claim as the sheet, not a corroboration of it</li>
+            <li>Circular citations: external submissions whose supporting reference is PMID 34930662, the SouthSeq paper itself</li>
+          </ul>
+          <p>With this stage we discovered that on roughly 11 findings, an external laboratory&rsquo;s submission cites the SouthSeq publication as its evidence. Counting that as independent support means the study corroborating itself through a third party.</p>
+          <p>The GEMINI table lacks this information, so every variant had to be resolved to its ClinVar record from gene and HGVS alone. That is an extra step and an extra error surface (and it is the reason the identity verification in step 4 runs first). Similarly to SouthSeq, for GEMINI we isolated both Athena and Rady before scoring anything, and excluded PMID 33587123 wherever it appeared.</p>
+
+          <h3>4) George-0.1: Evidence gathering and variant identity verification</h3>
+          <p>Now that we had our guardrails established, it was time to run George. George-0.1 first gathers primary evidence for every case from Ensembl (coordinates, transcript structure, CDS mapping), gnomAD v4 (population frequency, gene constraint), ClinVar via NCBI E-utilities (submission-level records), UniProt (domain and functional-site annotation), ClinGen dosage curation (haploinsufficiency and triplosensitivity), and VEP with the loss-of-function plugin and calibrated missense predictors.</p>
+          <p>From there we re-derived every variant&rsquo;s identity from scratch.</p>
+
+          <h3>5) Score each case and compare</h3>
+          <p>With our analysis complete we scored every finding against the ACMG/AMP criteria using the Tavtigian point system with ClinGen SVI&rsquo;s current combining rules. Every finding was then hand-checked by members of our technical staff and reviewed with the original publishers of the study.</p>
+
+          <h2>Results</h2>
+          <p>In our final report, most classifications agreed. Even still, we had some noteworthy upgrades and findings.</p>
+
+          <h3>GEMINI</h3>
+          <figure class="post-figure"><a href="assets/gemini-results-table.png" target="_blank" rel="noopener"><img src="assets/gemini-results-table.png" alt="Summary of the Gamow Labs reanalysis of GEMINI Table 2 findings. Of 60 total variants in 37 infants, the two laboratories agreed on 18 and George agreed with both on all 18. They disagreed on 12, where George sided with Rady 6 times, with Athena 5 times, and landed between them once. The remaining 30 variants were classified by one laboratory only."></a></figure>
+
+          <!-- CONTINUE HERE: GEMINI detail, SouthSeq results, closing. -->
         </div>
 
         <p class="inline-actions">
