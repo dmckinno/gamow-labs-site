@@ -175,7 +175,39 @@
           <h3>SouthSeq</h3>
           <figure class="post-figure"><a href="assets/southseq-results-table.png" target="_blank" rel="noopener"><img src="assets/southseq-results-table.png" alt="Summary of the Gamow Labs reanalysis of SouthSeq Table S2 findings. 19 findings were upgraded: 4 from VUS to Pathogenic, 9 from Likely pathogenic to Pathogenic, and 6 from VUS to Likely pathogenic. 29 were downgraded, and 145 agreed with the original classification. Primary findings rescored against current ACMG/AMP and ClinGen standards."></a></figure>
 
-          <!-- CONTINUE HERE: SouthSeq detail, quality observations, caveats, closing. -->
+          <p>A majority of our SouthSeq analysis showed consensus with the original report. But there were a notable amount of upgrades that were thematically similar.</p>
+          <p>The largest single driver was that PVS1 never applied to a clear null variant (an 8-point omission). Nonsense, frameshift or canonical-splice changes scored on PM2 alone, or PM2 + PP3, in genes where loss of function is the established mechanism. Given that 34% of SouthSeq&rsquo;s diagnostic variants were nonsense, frameshift or splice-site changes, this one gate accounts for a lot of movement.</p>
+          <p>Three other patterns showed up repeatedly:</p>
+          <ul>
+            <li><strong>PP4 became scoreable under our policy</strong>, where the disease has a single causative gene and the generated phenotype&rsquo;s limitations permitted it.</li>
+            <li><strong>Strength assignments set too low.</strong> PS2 was raised from Moderate to Strong where a full trio confirmed de novo status. PM5 was raised to Strong where four other pathogenic substitutions exist at the same residue.</li>
+            <li><strong>We discovered new evidence sitting in the public record but not counted.</strong> Published functional studies (SS-110b, SS-97), documented proband literature (SS-162, SS-110b, SS-329), and a PM3 that the maternal/de-novo split makes available (SS-113b).</li>
+          </ul>
+          <p>Our largest differentiation beyond the classification was actually which criteria applied in the ultimate scoring.</p>
+
+          <h4>Interesting cases where VUS &rarr; Pathogenic</h4>
+          <p><strong>SS-110b</strong>, <code>CLCNKB c.1312C&gt;T, p.(Arg438Cys)</code> 10 points, Pathogenic.</p>
+          <p>ClinVar has held this Pathogenic under a four-digit accession, VCV 7593, across multiple submitters with no conflicts. Two published electrophysiology studies show it damages chloride channel function &rarr; PS3 +4. Described in multiple families &rarr; PS4_Moderate +2. <code>p.Arg438His</code> at the same residue is independently Pathogenic &rarr; PM5 +2. The sheet called it a VUS.</p>
+          <p><strong>SS-176a</strong> and <strong>SS-176b</strong>, <code>DHCR24 c.1480C&gt;T p.(Arg494Ter)</code> and <code>c.1241_1242insAGTCC p.(Phe415fs)</code> 12 points each, Pathogenic.</p>
+          <p>The original scored PM2 + PP4 on both and never applied PVS1 or PM3 to a nonsense allele sitting in trans with a second null, trio-confirmed, in a recessive disorder whose phenotype the child has. Two pathogenic nulls in trans, matching phenotype, in the only gene for that disease, thus the case should not read &ldquo;Uncertain.&rdquo;</p>
+
+          <h4>Observations on quality issues</h4>
+          <p>A case study of this size being compiled by hand yielded some quality issues and inconsistencies. Sometimes an error in the summation of the ACMG score, or a typo in the codes caused an inaccurate classification. This can be crucial for future references, and is worth us to call out. Additionally, consumer chatbots doing a similar analysis, these issues could yield incorrect output. Fortunately, George-0.1 was able to catch these errors before we ran the analysis.</p>
+          <p>A clear example of this was SS-48, which was originally labeled as 0.30, Pathogenic. The original&rsquo;s own codes totalled 0.15, which is already VUS by the framework&rsquo;s own thresholds, while the classification field said Pathogenic.</p>
+          <p>Another example is in case SS-326. The zygosity field reads &ldquo;homozygous&rdquo; while its copy number reads &times;1. Those cannot both be true, and which one is right decides whether an asymptomatic infant is a carrier or has a pre-symptomatic diagnosis of progressive neurodegeneration.</p>
+          <p>The cleanest illustration needs no external data at all. SS-162 and SS-279 are the same <em>TFAP2A</em> variant in two different patients, sharing one ClinVar accession in two versions. The row with more evidence (confirmed de novo, PS2 applied) was called Likely pathogenic. The row with less, proband-only, was called Pathogenic. Based solely on the calculations of this table, these rows are conflicting.</p>
+          <p>As a final example, there were several where the arithmetic doesn&rsquo;t reach its own label. Eight rows carry a total that lands in a different tier than the classification field states: four CNVs (2.20 called Likely pathogenic; 0.15, 0.55 and 0.60 each called Pathogenic) and four sequence variants totalling 4 or 5 points under current combining rules while labelled LP or Pathogenic.</p>
+          <p>There were several other minor errors in the sheet that were caught by George-0.1 which we are actively addressing with the original clinical team.</p>
+
+          <h2>Caveats</h2>
+          <p>We worked from a published supplemental table, not from the sequencing data. Where the table is ambiguous, we made a documented assumption. Our phenotypes are synthetic, which is why every phenotype-dependent criterion in our output is either flagged as such or withheld.</p>
+          <p>These are reclassifications that exist in silo. They are not clinical re-reports, and nothing here changes a patient&rsquo;s record. To do that would require the originating laboratory, with access to the primary data, which we at Gamow Labs do not have.</p>
+          <p>We see this reanalysis as a baseline for what clinicians can build off of for future reclassifications. This is entirely based on public data using the agentic reasoning of George-0.1.</p>
+
+          <h2>Come work on this</h2>
+          <p>The bottleneck in genomic medicine is not sequencing. It&rsquo;s the time to interpret, and the reanalysis that should follow.</p>
+          <p>If you have read this far and find this work interesting, we would love to chat with you, <a href="careers.html">check out our careers page</a>.</p>
+          <p>And if you&rsquo;d rather just watch what we do next: <a href="https://gamowlabs.com/">subscribe to the newsletter</a>.</p>
         </div>
 
         <p class="inline-actions">
