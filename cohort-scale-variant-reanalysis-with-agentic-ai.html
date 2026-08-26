@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cohort-scale variant reanalysis with agentic AI: GEMINI and SouthSeq | Gamow Labs</title>
+    <meta name="description" content="We revisited the published variant classifications from the GEMINI and SouthSeq studies with George-0.1, our rare disease diagnosis agent, and scored every case against current ACMG criteria.">
+    <link rel="canonical" href="https://gamowlabs.com/cohort-scale-variant-reanalysis-with-agentic-ai.html">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Gamow Labs">
+    <meta property="og:url" content="https://gamowlabs.com/cohort-scale-variant-reanalysis-with-agentic-ai.html">
+    <meta property="og:title" content="Cohort-scale variant reanalysis with agentic AI: GEMINI and SouthSeq">
+    <meta property="og:description" content="We revisited the published variant classifications from the GEMINI and SouthSeq studies with George-0.1, our rare disease diagnosis agent, and scored every case against current ACMG criteria.">
+    <!-- TODO: swap to a figure from this post once the images land. -->
+    <meta property="og:image" content="https://gamowlabs.com/assets/gamow-logo-black.png">
+    <meta property="article:published_time" content="2026-08-27">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cohort-scale variant reanalysis with agentic AI: GEMINI and SouthSeq">
+    <meta name="twitter:description" content="We revisited the published variant classifications from the GEMINI and SouthSeq studies with George-0.1, our rare disease diagnosis agent, and scored every case against current ACMG criteria.">
+    <meta name="twitter:image" content="https://gamowlabs.com/assets/gamow-logo-black.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="index.html"><img src="assets/gamow-wordmark.jpeg" alt="Gamow Labs"></a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="careers.html">Careers</a>
+          <a href="blog.html" aria-current="page">Blog</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <article class="post-article">
+        <p class="meta">August 27, 2026 · Daniel McKinnon</p>
+        <h1>Cohort-scale variant reanalysis with agentic AI: GEMINI and SouthSeq</h1>
+
+        <div class="post-body">
+          <p>When a variant classification happens on someone&rsquo;s genome, it&rsquo;s a snapshot of what was knowable that day. Obviously with time, the evidence underneath it keeps moving. ClinVar continues accumulating submissions, ClinGen updates dosage curations, expert panels issue calls that supersede everything below them, or the classification rules themselves get revised. All the while, the variant classification stays static, unless someone goes in by hand to re-run and publish new findings.</p>
+          <p>At Gamow Labs, we are in pursuit of building a &ldquo;living diagnosis&rdquo; for patients. Our idea is that the genome is read once, but with new science and published findings, the diagnosis updates accordingly. With this approach, we hypothesize that correctly harnessed AI agents can perform genetic disease re-interpretation at or above human performance.</p>
+          <p>Variant reanalysis is a good test of our thesis, because it is high-volume, low-priority yet genuinely valuable, and because almost nobody does it at scale. It is exactly the kind of work that gets deferred indefinitely when it has to be done one variant at a time, by hand, by someone who could otherwise be seeing active patients.</p>
+          <p>To start this test, we recently reanalyzed cases from <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7885094/">GEMINI</a>, which compared genome interpretation between two clinical laboratories, and <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8995345/#SD5">SouthSeq</a>, a large genomic sequencing study of infants with suspected genetic disease in the Southeastern United States.</p>
+          <p>We took the published case-level findings from both and revisited them with <a href="sota-genome-interpretation-with-agentic-ai.html">George-0.1</a>, our own rare disease diagnosis agent.</p>
+          <p>For GEMINI, we found agreement with both laboratories on all 18 variants where they concurred. On the 12 where they did not, George matched one lab&rsquo;s call 11 times (six with one, five with the other), and landed between them once.</p>
+          <p>For SouthSeq, we found 19 upgrades, including several VUS &rarr; Pathogenic reclassifications. We also found pathogenic findings that should be downgraded, a VUS that became likely benign, and surprisingly numerous places where the original evidence was either unavailable, inconsistently applied, or did not support the stated classification.</p>
+
+          <h2>Initial review of the papers</h2>
+
+          <h3>GEMINI</h3>
+          <p>The original GEMINI study enrolled 113 infants across six children&rsquo;s hospitals beginning in July 2019: Tufts Medical Center, Rady Children&rsquo;s, UPMC Children&rsquo;s, Mount Sinai Kravis, North Carolina Children&rsquo;s and Cincinnati Children&rsquo;s. Eligibility required hospitalization under one year of age with a suspected, undiagnosed genetic disorder; infants born before 23 weeks&rsquo; gestation, with major congenital infection, or with a genetic diagnosis already explaining their findings were excluded. What makes the cohort unusual is that every infant was tested twice, in parallel: rapid whole genome sequencing at one laboratory, and a targeted 1,722-gene panel at the other.</p>
+          <p>Diagnostic or uncertain variants came back for 51 of the 113 infants (45%), and 37 (33%) carried a pathogenic or likely pathogenic variant.</p>
+          <p>GEMINI was a comparison study: the same infants&rsquo; genomes were interpreted by two laboratories: Rady Children&rsquo;s Institute for Genomic Medicine and Athena. The published <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7885094/#poi200096t2">Table 2</a> lays out where they agreed and where they didn&rsquo;t, across 60 variants in 37 infants.</p>
+          <p>The disagreement rate is the interesting part. On the 30 variants both laboratories classified, they agreed on 18. The other 12 span the full range of consequence: LP against VUS, P against LP, and in one case VUS against Pathogenic on the same allele.</p>
+
+          <h3>SouthSeq</h3>
+          <p>The original SouthSeq study enrolled 367 infants from 365 families between February 2018 and July 2020, recruiting from NICUs, prenatal clinics and pediatric units. Eligibility required inpatient status within the first year of life with congenital anomalies consistent with a genetic disorder or an unexplained major medical condition. The cohort was intentionally enriched for racial and ethnic minorities and infants from rural and medically underserved communities.</p>
+          <p>The results made the case for genome sequencing as a first-line test. Definitive or likely diagnostic findings turned up in 30% of infants (109), and another 14% (51) received an uncertain result. Most strikingly, of the diagnostic findings genome sequencing produced, only 43% (43 of 101) were also detected by the clinical genetic testing running concurrently.</p>
+          <p>SouthSeq performed proband-only sequencing, with parental samples obtained for Sanger confirmation when they were available. That was the right call for a study operating at that scale in that setting, but it means 35% of diagnostic findings have unknown inheritance simply because parental samples weren&rsquo;t there. Inheritance is paramount in ACMG scoring. For example, a confirmed de novo occurrence is worth up to 8 points, and establishing phase in a recessive case is often the difference between two VUSs and a diagnosis.</p>
+          <p>The <a href="https://pmc.ncbi.nlm.nih.gov/articles/instance/8995345/bin/NIHMS1772956-supplement-Table_S2.xlsx">Supplemental Table S2</a> in the paper lists 202 variants across 160 infants, each with its transcript, its ACMG/AMP classification, the criteria codes behind that classification, and a case-level designation. This was a great, thorough investigation shared with the public and that generosity is the only reason this work was possible.</p>
+
+          <h2>Our workflow</h2>
+          <p>Our review can be broken down into 5 steps:</p>
+          <ol>
+            <li><strong>Analyze the papers</strong>: rebuild the rulebook as it stands today, and fix our interpretation policy before looking at any case</li>
+            <li><strong>Generate synthetic phenotypes (for SouthSeq)</strong>: since Table S2 carries none, and constrain what they are allowed to prove</li>
+            <li><strong>Pull ClinVar at submitter level</strong>: separating independent evidence from the reporting laboratory&rsquo;s own deposit</li>
+            <li><strong>Running George-0.1</strong>: evidence gathering and variant identity verification</li>
+            <li><strong>Score and compare</strong>: calculating every case against all 28 criteria</li>
+          </ol>
+
+          <h3>1) Analyze the papers</h3>
+          <p>GEMINI published the final results of their findings, but no indication as to how they came to the classification via the ACMG analysis. Their table gives each variant&rsquo;s classification from both laboratories and a short reason-for-discordance, including the interpretation, structural variant, gene-level, coverage, filtering.</p>
+          <p>SouthSeq published its criteria codes. Their table gives the actual codes behind each classification, so we could compare our reasoning against theirs code by code as well as the final interpretation.</p>
+          <p>Since both of the original studies were conducted, the ACMG rules have evolved. In SouthSeq for our initial analysis, we could already audit a lot of the cases based on the newer guidelines. Three changes account for most of the movement:</p>
+          <ul>
+            <li>PP5 and BP6 were retired by the ClinGen Sequence Variant Interpretation working group in 2018. Those criteria let you borrow another lab&rsquo;s classification as evidence. They no longer count.
+              <ul>
+                <li>PP5 appears on 32 of the 176 finding-rows in Table S2 (SS-3, SS-4, SS-7, SS-10, SS-43, SS-44, SS-45, SS-83, SS-100, SS-102, SS-103, SS-113, SS-114, SS-116, SS-133, SS-153, SS-155, SS-169, SS-175, SS-197, SS-198, SS-201, SS-249, SS-260, SS-271, SS-275, SS-279, SS-282, SS-308, SS-318, SS-321, SS-329).</li>
+              </ul>
+            </li>
+            <li>PM2 dropped to Supporting. Absence from population databases used to be worth Moderate. Under current SVI recommendations it&rsquo;s worth 1 point instead of 2.</li>
+            <li>ClinGen dosage curation matured. There is now a curated, downloadable answer to &ldquo;is haploinsufficiency the established mechanism for this gene,&rdquo; covering thousands of genes. That answer is the gate on PVS1, worth 8 of the 10 points a Pathogenic call requires.</li>
+          </ul>
+          <p>We also fixed our own interpretation policy up front, before scoring anything, so that no decision could be made to fit a result:</p>
+          <ul>
+            <li>PP4 withheld wherever the disease has more than one causative gene. A phenotype cannot discriminate between a disease&rsquo;s genes, so it carries no gene-specific information.</li>
+            <li>PP3 withheld alongside PVS1 for canonical splice variants (the prediction and the criterion are the same claim made twice).</li>
+            <li>PP3 does not apply to in-frame indels. No calibrated predictor exists for them.</li>
+            <li>PM1 and PM5 do not stack. Take whichever is better evidenced.</li>
+            <li>PS4 needs documented probands, not ClinVar aggregation
+              <ul>
+                <li>We created this rule based on the GEMINI case where a well-known recurrent variant&rsquo;s support turned out to be submitter count rather than counted probands.</li>
+              </ul>
+            </li>
+            <li>Recessive proband evidence routes to PM3, not PS4
+              <ul>
+                <li>We created this rule based on the GEMINI case where both laboratories reached the same conclusion by different routes.</li>
+              </ul>
+            </li>
+            <li>PM3 uses the partner allele&rsquo;s classification excluding the pairing under evaluation. Two VUSs cannot lift each other into LP.</li>
+            <li>FDA-recognised ClinGen expert panel calls override the generic rubric
+              <ul>
+                <li>This was decisive on SouthSeq cases SS-363a, SS-44c and SS-292.</li>
+              </ul>
+            </li>
+          </ul>
+
+          <h3>2) Generate synthetic phenotypes (for SouthSeq)</h3>
+          <p>GEMINI publishes each infant&rsquo;s phenotype. That lets us score phenotype-dependent criteria against real clinical features rather than generated ones.</p>
+          <p>The original SouthSeq study didn&rsquo;t include a phenotype for each case. We generated synthetic phenotypes for each case in SouthSeq to accommodate for phenotype-dependent criteria (PP4, PS4, CNV Section 5). This was based on a skill that conditions on sex, age, variant, gene or region, inheritance, variant classification, and disease association. That outputted <code>Generated Synthetic Phenotype</code>, <code>Generated Synthetic HPO</code> and <code>Generated Synthetic Limitations</code>. We also made it clear in our analysis that this was a generative phenotype that makes the output deliberately incomplete, more explicitly that the absence of a feature is not evidence of absence.</p>
+          <p>This made PP4 interesting: the disease name is an input to the phenotype generator. So we needed to avoid circular evidence (phenotype was derived from the disease, used as evidence for the disease, meaning PP4 would be worth +1 on most rows and move tiers). Applying it would inflate the entire sheet. So we established the following policy:</p>
+
+          <!-- CONTINUE HERE: PP4 policy, steps 3-5, results, figures, closing. -->
+        </div>
+
+        <p class="inline-actions">
+          <a class="profile-link" href="careers.html">See open roles at Gamow Labs</a>
+        </p>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <img src="assets/gamow-wordmark.jpeg" alt="Gamow Labs">
+        <span>The interpretation layer for genomic medicine.</span>
+      </div>
+    </footer>
+  </body>
+</html>

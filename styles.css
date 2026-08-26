@@ -460,6 +460,13 @@ h3 {
   margin-bottom: 8px;
 }
 
+/* Nested lists: the parent rule's negative top margin is meant to close the gap
+   under a lead-in paragraph, and reads as cramped one level down. */
+.post-body li > ul,
+.post-body li > ol {
+  margin: 8px 0 0;
+}
+
 .post-table-wrap {
   margin: 36px 0;
   overflow-x: auto;
