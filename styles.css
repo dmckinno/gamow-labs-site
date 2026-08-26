@@ -496,6 +496,12 @@ h3 {
   font-weight: 600;
 }
 
+/* Row labels stay semantic th cells for screen readers, but read as plain
+   text where only the header row should carry weight. */
+.post-table-plain tbody th {
+  font-weight: 400;
+}
+
 .post-table tbody td {
   color: var(--muted);
 }
