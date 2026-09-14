@@ -445,6 +445,24 @@ h3 {
   border-bottom: 0;
 }
 
+/* Portrait photos would fill a whole screen at column width, so cap and center them. */
+.post-figure-narrow {
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+/* Matches .post-caption. */
+.post-figure figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.post-figure-narrow figcaption {
+  text-align: center;
+}
+
 .post-body blockquote {
   margin: 32px 0;
   padding-left: 24px;
