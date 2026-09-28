@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LabBench: Can AI agents decide what experiment to run next? | Gamow Labs</title>
+    <meta name="description" content="LabBench is a benchmark of 20 real wet-lab decisions. Frontier agents interpret experiments well but rarely choose the right next one, even when they hold the knowledge to do it.">
+    <link rel="canonical" href="https://gamowlabs.com/labbench-benchmarking-ai-wet-lab-decisions.html">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Gamow Labs">
+    <meta property="og:url" content="https://gamowlabs.com/labbench-benchmarking-ai-wet-lab-decisions.html">
+    <meta property="og:title" content="LabBench: Can AI agents decide what experiment to run next?">
+    <meta property="og:description" content="LabBench is a benchmark of 20 real wet-lab decisions. Frontier agents interpret experiments well but rarely choose the right next one, even when they hold the knowledge to do it.">
+    <meta property="og:image" content="https://gamowlabs.com/assets/labbench-social.png">
+    <meta property="og:image:width" content="1700">
+    <meta property="og:image:height" content="947">
+    <meta property="og:image:alt" content="Bar chart of LabBench scores: GPT-6 Astra 40.8%, Claude Opus 5.5 40.5%, Grok 4.7 29.6%, Muse Spark 1.3 28.2%, Gemini 3.8 Flash 18.4%.">
+    <meta property="article:published_time" content="2026-09-28">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LabBench: Can AI agents decide what experiment to run next?">
+    <meta name="twitter:description" content="LabBench is a benchmark of 20 real wet-lab decisions. Frontier agents interpret experiments well but rarely choose the right next one, even when they hold the knowledge to do it.">
+    <meta name="twitter:image" content="https://gamowlabs.com/assets/labbench-social.png">
+    <meta name="twitter:image:alt" content="Bar chart of LabBench scores: GPT-6 Astra 40.8%, Claude Opus 5.5 40.5%, Grok 4.7 29.6%, Muse Spark 1.3 28.2%, Gemini 3.8 Flash 18.4%.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="index.html"><img src="assets/gamow-wordmark.jpeg" alt="Gamow Labs"></a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="careers.html">Careers</a>
+          <a href="blog.html" aria-current="page">Blog</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <article class="post-article">
+        <p class="meta">September 28, 2026 · Ben Reilly, Leah Damon, Daniel McKinnon</p>
+        <h1>LabBench: Can AI agents decide what experiment to run next?</h1>
+
+        <p class="crosspost-note">This post summarizes our preprint, <a href="assets/labbench-preprint.pdf">LabBench: Benchmarking AI wet lab experimental design and decision-making for AI Agents</a> (PDF).</p>
+
+        <div class="post-body">
+          <p>Biology moves at the speed of its next experiment. Cells grow, differentiate and respond on their own schedules, so every experiment costs weeks of bench time and material. Choosing the wrong one first is the most expensive mistake a lab can make.</p>
+          <p>Today that choice is made by human experts. Given a set of results, they pick the test that can most efficiently strengthen or falsify the working hypothesis. If AI agents are going to accelerate discovery past human capacity, this is the skill they need, and we need a way to measure it.</p>
+          <p>That&rsquo;s why we built <strong>LabBench</strong>: 20 held-out tasks drawn from the records of real wet labs, each ending in a decision the lab&rsquo;s scientists actually made.</p>
+
+          <h2>What LabBench measures</h2>
+          <p>Each task is a snapshot in time. The agent receives the experimental records that existed at a decision point: slide exports, figures, tables, scripts and sequencing outputs. The lab&rsquo;s own interpretation and what it decided next are withheld. The agent has to write a report that commits to a decision: in six tasks, a ranked set of next experiments; in the rest, which condition, model, comparison or claim the evidence supports.</p>
+          <p>The tasks span seven experimental domains: nascent transcription, gene regulation, 3D genome organization, assay and library development, target and disease-model validation, hit-to-lead chemistry, and drug-response profiling.</p>
+          <p>We don&rsquo;t just check the final answer. Each task is graded against 20&ndash;22 binary pass/fail criteria tied to the evidence the agent could see and the hidden lab record behind it. So an agent is scored both on whether it reaches the experts&rsquo; decision and on the reasoning that gets it there.</p>
+
+          <figure class="chart" aria-label="How a LabBench task is built, in five steps">
+            <p class="chart-title">From lab archive to graded task</p>
+            <p class="chart-sub">Every task was reviewed in full by expert biologists.</p>
+            <ol class="pipeline-steps">
+              <li><b>Mine</b><span>Map a lab&rsquo;s archive and find decisions with their evidence on record.</span></li>
+              <li><b>Assemble</b><span>Supply the records the lab had; hold out its conclusion.</span></li>
+              <li><b>Rubric</b><span>Write 20&ndash;22 binary criteria tied to hidden evidence.</span></li>
+              <li><b>Harden</b><span>Rework any task a solver agent passes trivially.</span></li>
+              <li><b>Review</b><span>Biologists check clarity, feasibility and relevance.</span></li>
+            </ol>
+          </figure>
+
+          <p>We built the tasks from internal lab records that are unlikely to be recallable from the open internet. We expect the agent to navigate the scientific evidence as a real researcher would, without the task description pointing to the evidence that matters.</p>
+
+          <h2>The results</h2>
+          <p>We ran five frontier agents, each in its vendor&rsquo;s own harness, once on every task.</p>
+
+          <figure class="chart" role="img" aria-label="Mean share of criteria passed: GPT-6 Astra 40.8% (95% interval 34 to 48), Claude Opus 5.5 40.5% (33 to 49), Grok 4.7 29.6% (23 to 37), Muse Spark 1.3 28.2% (23 to 34), Gemini 3.8 Flash 18.4% (13 to 24).">
+            <p class="chart-title">The best agents pass two in five criteria</p>
+            <p class="chart-sub">Mean share of criteria passed over 20 tasks; the black line is the 95% interval.</p>
+            <div class="bar-row"><span class="bar-label">GPT-6 Astra</span><span class="bar-track"><span class="bar-fill" style="width:40.8%;background:#55758b"></span><span class="bar-ci" style="left:34%;width:14%"></span></span><span class="bar-value">40.8%<small>34&ndash;48</small></span></div>
+            <div class="bar-row"><span class="bar-label">Claude Opus 5.5</span><span class="bar-track"><span class="bar-fill" style="width:40.5%;background:#7d3027"></span><span class="bar-ci" style="left:33%;width:16%"></span></span><span class="bar-value">40.5%<small>33&ndash;49</small></span></div>
+            <div class="bar-row"><span class="bar-label">Grok 4.7</span><span class="bar-track"><span class="bar-fill" style="width:29.6%;background:#1b1a17"></span><span class="bar-ci" style="left:23%;width:14%;background:#b8aea0"></span></span><span class="bar-value">29.6%<small>23&ndash;37</small></span></div>
+            <div class="bar-row"><span class="bar-label">Muse Spark 1.3</span><span class="bar-track"><span class="bar-fill" style="width:28.2%;background:#6f8a5b"></span><span class="bar-ci" style="left:23%;width:11%"></span></span><span class="bar-value">28.2%<small>23&ndash;34</small></span></div>
+            <div class="bar-row"><span class="bar-label">Gemini 3.8 Flash</span><span class="bar-track"><span class="bar-fill" style="width:18.4%;background:#c08a2e"></span><span class="bar-ci" style="left:13%;width:11%"></span></span><span class="bar-value">18.4%<small>13&ndash;24</small></span></div>
+            <div class="bar-axis"><span></span><span class="axis-ticks"><span>0</span><span>25</span><span>50</span><span>75</span><span>100%</span></span><span></span></div>
+          </figure>
+
+          <p>GPT-6 Astra and Claude Opus 5.5 are statistically tied at the top, but Astra got there in a median of 5 minutes per task against Opus&rsquo;s 35. Behind them sit Grok 4.7, Muse Spark 1.3 and Gemini 3.8 Flash.</p>
+
+          <h3>Agents fail the same criteria</h3>
+          <p>The most striking pattern is how much the agents agree about what they can&rsquo;t do. 182 of the 406 criteria, 45%, were passed by no agent at all, and only 31 by all five. Pairs of agents agree on 70&ndash;84% of verdicts, well above what their pass rates alone would predict. What one frontier agent misses, the others usually miss too.</p>
+
+          <figure class="chart" role="img" aria-label="Number of criteria by how many of the five agents passed them: none 182, one 55, two 40, three 45, four 53, all five 31.">
+            <p class="chart-title">45% of criteria were passed by no agent</p>
+            <p class="chart-sub">Number of the 406 criteria, by how many of the five agents passed each one.</p>
+            <div class="columns">
+              <div class="column zero"><b>182</b><i style="height:100%"></i></div>
+              <div class="column"><b>55</b><i style="height:30.2%"></i></div>
+              <div class="column"><b>40</b><i style="height:22%"></i></div>
+              <div class="column"><b>45</b><i style="height:24.7%"></i></div>
+              <div class="column"><b>53</b><i style="height:29.1%"></i></div>
+              <div class="column"><b>31</b><i style="height:17%"></i></div>
+            </div>
+            <div class="column-labels"><span>none</span><span>1</span><span>2</span><span>3</span><span>4</span><span>all 5</span></div>
+          </figure>
+
+          <h3>They identify and qualify; they rarely choose</h3>
+          <p>The criteria most agents pass ask for single, local steps the records make explicit: saying what a measurement is (a modeled cluster&rsquo;s size is not a cell frequency), declining an overclaim (a predicted drug response is not a completed validation), or reconstructing what an analysis did.</p>
+          <p>The criteria they miss ask them to commit. Criteria that require choosing, committing or ranking pass 21% of the time, against 47% for identifying what something is. Nine of the 23 core decisions were never passed. And in the six tasks that ask for ranked next experiments, no agent passed any of the 13 criteria on which experiment should come first.</p>
+
+          <figure class="chart" role="img" aria-label="Share of agents passing, by what the criterion asks for: identify what something is 47%, reconstruct or explain 38%, qualify or separate a claim 33%, integrate evidence 31%, quantify or read out 30%, choose commit or rank 21%.">
+            <p class="chart-title">Choosing is the hardest move</p>
+            <p class="chart-sub">Mean share of agents passing, grouped by what the criterion asks the agent to do. Beneath each value: the share of those criteria no agent passed.</p>
+            <div class="bar-row"><span class="bar-label">Identify what something is</span><span class="bar-track"><span class="bar-fill" style="width:47%;background:#55758b"></span></span><span class="bar-value">47%<small>none: 32%</small></span></div>
+            <div class="bar-row"><span class="bar-label">Reconstruct or explain</span><span class="bar-track"><span class="bar-fill" style="width:38%;background:#55758b"></span></span><span class="bar-value">38%<small>none: 37%</small></span></div>
+            <div class="bar-row"><span class="bar-label">Qualify a claim</span><span class="bar-track"><span class="bar-fill" style="width:33%;background:#55758b"></span></span><span class="bar-value">33%<small>none: 39%</small></span></div>
+            <div class="bar-row"><span class="bar-label">Integrate evidence</span><span class="bar-track"><span class="bar-fill" style="width:31%;background:#55758b"></span></span><span class="bar-value">31%<small>none: 38%</small></span></div>
+            <div class="bar-row"><span class="bar-label">Quantify or read out</span><span class="bar-track"><span class="bar-fill" style="width:30%;background:#55758b"></span></span><span class="bar-value">30%<small>none: 46%</small></span></div>
+            <div class="bar-row"><span class="bar-label"><strong>Choose, commit or rank</strong></span><span class="bar-track"><span class="bar-fill" style="width:21%;background:#7d3027"></span></span><span class="bar-value">21%<small>none: 64%</small></span></div>
+            <div class="bar-axis"><span></span><span class="axis-ticks"><span>0</span><span>25</span><span>50</span><span>75</span><span>100%</span></span><span></span></div>
+          </figure>
+
+          <h2>The knowledge is there. The judgment isn&rsquo;t.</h2>
+          <p>A benchmark full of never-passed criteria invites an obvious critique: maybe the tasks are unfair, and no agent could reasonably get there. We tested that directly.</p>
+          <p>We took five core decisions that no agent had passed, from five different themes. For each, we appended a single sentence to the brief that points at evidence the agent already had, without stating the answer or adding any domain knowledge. Then we reran GPT-6 Astra, which had failed all five in the benchmark.</p>
+          <p>With one sentence, it passed all five.</p>
+
+          <figure class="chart" role="img" aria-label="GPT-6 Astra's whole-task score before and after a one-sentence hint: drug response task 20% to 75%, 3D genome task 23% to 64%, nascent transcription task 50% to 82%, gene regulation task 35% to 60%, assay development task 35% to 40%. The probed core decision flipped from fail to pass in all five.">
+            <p class="chart-title">One sentence flips the decision</p>
+            <p class="chart-sub">GPT-6 Astra&rsquo;s whole-task score on each probed task. The probed core decision went from fail to pass in all five.</p>
+            <p class="legend"><span>Benchmark run</span><span class="filled">With one added sentence</span></p>
+            <div class="dumbbell-row"><span>Next two experiments<small>drug response</small></span><span class="dumbbell-track"><span class="dumbbell-link" style="left:20%;width:55%"></span><span class="dumbbell-dot" style="left:20%"></span><span class="dumbbell-dot after" style="left:75%"></span></span><span class="dumbbell-value">20% &rarr; 75%</span></div>
+            <div class="dumbbell-row"><span>Chromosome model review<small>3D genome</small></span><span class="dumbbell-track"><span class="dumbbell-link" style="left:23%;width:41%"></span><span class="dumbbell-dot" style="left:23%"></span><span class="dumbbell-dot after" style="left:64%"></span></span><span class="dumbbell-value">23% &rarr; 64%</span></div>
+            <div class="dumbbell-row"><span>Candidate coding transcripts<small>nascent transcription</small></span><span class="dumbbell-track"><span class="dumbbell-link" style="left:50%;width:32%"></span><span class="dumbbell-dot" style="left:50%"></span><span class="dumbbell-dot after" style="left:82%"></span></span><span class="dumbbell-value">50% &rarr; 82%</span></div>
+            <div class="dumbbell-row"><span>Motif evidence across datasets<small>gene regulation</small></span><span class="dumbbell-track"><span class="dumbbell-link" style="left:35%;width:25%"></span><span class="dumbbell-dot" style="left:35%"></span><span class="dumbbell-dot after" style="left:60%"></span></span><span class="dumbbell-value">35% &rarr; 60%</span></div>
+            <div class="dumbbell-row"><span>Library preparation choice<small>assay development</small></span><span class="dumbbell-track"><span class="dumbbell-link" style="left:35%;width:5%"></span><span class="dumbbell-dot" style="left:35%"></span><span class="dumbbell-dot after" style="left:40%"></span></span><span class="dumbbell-value">35% &rarr; 40%</span></div>
+            <div class="bar-axis dumbbell-axis"><span></span><span class="axis-ticks"><span>0</span><span>25</span><span>50</span><span>75</span><span>100%</span></span><span></span></div>
+            <p class="chart-note">Each hinted task was run once. Each hint shares at most one content word with the criterion&rsquo;s pass rule that the brief doesn&rsquo;t already contain.</p>
+          </figure>
+
+          <p>Here is what those sentences did in three of the cases.</p>
+
+          <div class="probe-cards">
+            <div class="probe-card">
+              <h4>Drug response</h4>
+              <p><span class="probe-label">The evidence</span><br>A death-inducing compound triggers a stronger early NF-&kappa;B signature than three other death inducers, and an inhibitor that rescues the cells also lowers it. No experiment tests whether the response actually drives death.</p>
+              <p><span class="probe-label">What agents did</span><br>Four of five designed the right experiment, a selective NF-&kappa;B perturbation measuring both the response and death, and then ranked it second.</p>
+              <p><span class="probe-label">The hint</span><br>&ldquo;Rank first the experiment that could tell a cause from a bystander.&rdquo; The decisive experiment moved to first, and the task score rose from 4/20 to 15/20.</p>
+            </div>
+            <div class="probe-card">
+              <h4>Assay development</h4>
+              <p><span class="probe-label">The evidence</span><br>Two tagmentation traces: one peaks at 210&nbsp;bp with a declining tail; the other peaks at 238&nbsp;bp but carries a broad shoulder of large, incompletely cut fragments.</p>
+              <p><span class="probe-label">What agents did</span><br>Every agent chose the larger 238&nbsp;bp peak and overlooked the shoulder.</p>
+              <p><span class="probe-label">The hint</span><br>&ldquo;Judge each tagmentation trace by its whole size distribution, not only by where its peak falls.&rdquo; The agent chose the lab&rsquo;s condition.</p>
+            </div>
+            <div class="probe-card">
+              <h4>Gene regulation</h4>
+              <p><span class="probe-label">The evidence</span><br>A cell type&rsquo;s support is counted as pairwise wins between datasets.</p>
+              <p><span class="probe-label">What agents did</span><br>No agent noticed that one unusually high dataset can supply many of those wins on its own.</p>
+              <p><span class="probe-label">The hint</span><br>&ldquo;Check whether the evidence for a cell type could come mostly from a single dataset.&rdquo; The agent explained exactly that, and the task score rose from 7/20 to 12/20.</p>
+            </div>
+          </div>
+
+          <p>None of these hints teaches the agent any biology. They redirect attention to evidence it already had. We read this as a gap in reasoning rather than in knowledge: the agents hold the biological knowledge these decisions require, but don&rsquo;t bring it to bear unprompted.</p>
+
+          <h2>Where experimental design breaks down</h2>
+          <p>To run experiments autonomously, agents need a working model of what experiments cost and of the specific evidence that would count against a hypothesis. Two tasks show how far there is to go.</p>
+          <h3>Choosing the discriminating experiment</h3>
+          <p>A new assay for labeling nascent RNA joins a chemical handle to RNA ends, and synthetic-oligo tests had shown that the join forms. Two untested steps could still break the assay, so the lab&rsquo;s next two experiments isolated them cheaply: whether reverse transcriptase can copy across the chemical join, and whether the join forms in cell lysate. Four of five agents instead ranked first an experiment on a step the lab hadn&rsquo;t flagged, and no agent placed the lysate test in its top two.</p>
+          <h3>Weighing cost</h3>
+          <p>A lab had already started a small pilot comparing a disease-variant cell line with its unedited parent, and planned a broad compound screen in the same pair only once the drug-free genotype signature proved repeatable. No agent committed to this cheap, gated path. Claude Opus 5.5 opened with a new differentiation into monocytes and macrophages and pushed the screen to a third stage; GPT-6 Astra began with a single-compound dose-response and then moved to 24-day differentiated cells. Both spend weeks before establishing that the signal exists.</p>
+
+          <h2>Why this matters</h2>
+          <p>Frontier agents already know a lot of biology, enough to work alongside expert biologists when experimental design stays with humans. But in real experimentation, wall-clock time is irreducible, which makes autonomous and correct experimental design arguably the single most important capability for making AI agents superhuman at this work.</p>
+          <p>LabBench measures exactly that and penalizes failures along this axis. Better results on LabBench should mean agents that can carry out supervised, autonomous wet-lab work, and eventually run full programs themselves. We&rsquo;ll keep measuring as the frontier moves.</p>
+          <p>The full methods, every figure and the task list are in the <a href="assets/labbench-preprint.pdf">preprint</a>. If building agents that do real science at the intersection of AI and biology resonates with you, we&rsquo;re hiring.</p>
+        </div>
+
+        <p class="inline-actions">
+          <a class="profile-link" href="assets/labbench-preprint.pdf">Read the LabBench preprint (PDF)</a>
+          <a class="profile-link" href="careers.html">See open roles at Gamow Labs</a>
+        </p>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <img src="assets/gamow-wordmark.jpeg" alt="Gamow Labs">
+        <span>The interpretation layer for genomic medicine.</span>
+      </div>
+    </footer>
+  </body>
+</html>
