@@ -1039,3 +1039,253 @@ h3 {
     row-gap: 20px;
   }
 }
+
+.scatter {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  grid-template-rows: 260px auto;
+  column-gap: 8px;
+}
+
+.scatter-y,
+.scatter-plot,
+.scatter-x {
+  position: relative;
+}
+
+.scatter-y span {
+  position: absolute;
+  right: 0;
+  transform: translateY(50%);
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.scatter-plot {
+  border-left: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-right: 5.5rem;
+}
+
+.scatter-x {
+  grid-column: 2;
+  height: 1.6em;
+  margin-right: 5.5rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.scatter-x span {
+  position: absolute;
+  top: 4px;
+  transform: translateX(-50%);
+}
+
+.scatter-dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  margin: 0 0 -7px -7px;
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+}
+
+.scatter-label {
+  position: absolute;
+  margin: 0 0 -0.75em 12px;
+  font-size: 0.86rem;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.scatter-label.left {
+  transform: translateX(calc(-100% - 24px));
+  text-align: right;
+}
+
+.scatter-key {
+  display: none;
+  margin: 12px 0 0;
+}
+
+.scatter-label small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.heat {
+  display: grid;
+  grid-template-columns: minmax(8rem, 1.5fr) repeat(5, 1fr);
+  gap: 3px;
+  font-size: 0.9rem;
+}
+
+.heat-head {
+  padding-bottom: 6px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.heat-label {
+  align-self: center;
+  padding-right: 8px;
+  line-height: 1.15;
+}
+
+.heat-label small {
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.heat-cell {
+  padding: 8px 0;
+  border-radius: 3px;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.heat-cell.dark {
+  color: #fff;
+}
+
+.legend-models {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.legend-models span::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background: var(--c);
+}
+
+.strip-row,
+.strip-axis {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.strip-label small {
+  margin-left: 6px;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.strip-track {
+  position: relative;
+  height: 18px;
+  margin-right: 12px;
+  background: linear-gradient(var(--line), var(--line)) center / 100% 1px no-repeat;
+}
+
+.strip-dot {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border: 1.5px solid var(--paper);
+  border-radius: 50%;
+}
+
+.strip-rule {
+  margin: 12px 0;
+  border-top: 1px dashed var(--line);
+}
+
+.strip-ticks {
+  margin-right: 12px;
+}
+
+.strip-ticks span:nth-child(1) { left: 0; }
+.strip-ticks span:nth-child(2) { left: 33.33%; }
+.strip-ticks span:nth-child(3) { left: 66.67%; }
+.strip-ticks span:nth-child(4) { left: 100%; }
+
+.probe-figure {
+  margin: 4px 0 14px;
+}
+
+.probe-figure img {
+  width: 100%;
+  background: #fff;
+}
+
+.post-body .probe-figure a {
+  display: block;
+  border-bottom: 0;
+  cursor: zoom-in;
+}
+
+.probe-figure figcaption {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.probe-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 800px) {
+  .scatter {
+    grid-template-rows: 220px auto;
+  }
+
+  .scatter-label {
+    display: none;
+  }
+
+  .scatter-plot,
+  .scatter-x {
+    margin-right: 0.75rem;
+  }
+
+  .scatter-key {
+    display: flex;
+  }
+
+  .heat {
+    grid-template-columns: 6.5rem repeat(5, 1fr);
+    font-size: 0.8rem;
+  }
+
+  .heat-head {
+    font-size: 0.68rem;
+  }
+
+  .strip-row,
+  .strip-axis {
+    grid-template-columns: 7.5rem 1fr;
+    gap: 8px;
+    font-size: 0.85rem;
+  }
+
+  .strip-ticks span:nth-child(2),
+  .strip-ticks span:nth-child(3),
+  .strip-ticks span:nth-child(4) {
+    display: block;
+  }
+
+  .probe-pair {
+    grid-template-columns: 1fr;
+  }
+}
