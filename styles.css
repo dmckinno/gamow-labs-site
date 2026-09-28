@@ -1289,3 +1289,37 @@ h3 {
     grid-template-columns: 1fr;
   }
 }
+
+/* Partnership call to action: the one filled element on the page. */
+.cta-card {
+  margin: 8px 0 40px;
+  padding: 26px 28px 24px;
+  border-top: 3px solid var(--accent);
+  background: var(--soft);
+}
+
+.post-body .cta-card p {
+  margin-bottom: 16px;
+}
+
+.post-body .cta-card .cta-actions {
+  margin: 22px 0 0;
+}
+
+.post-body .cta-card .button {
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 3px;
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.post-body .cta-card .button:hover {
+  background: #5f231c;
+}
+
+@media (max-width: 800px) {
+  .cta-card {
+    padding: 20px 18px 18px;
+  }
+}
