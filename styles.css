@@ -1103,7 +1103,7 @@ h3 {
   text-align: right;
 }
 
-.scatter-key {
+.legend-models.scatter-key {
   display: none;
   margin: 12px 0 0;
 }
@@ -1259,7 +1259,7 @@ h3 {
     margin-right: 0.75rem;
   }
 
-  .scatter-key {
+  .legend-models.scatter-key {
     display: flex;
   }
 
